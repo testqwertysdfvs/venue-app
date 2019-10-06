@@ -1,11 +1,15 @@
 import React from 'react';
-import {Text} from "./style";
+import GlobalStyle from './../../globalStyle';
+import {Title} from "./style";
 
 function App() {
     return (
-        <div>
-            <Text>React app</Text>
-        </div>
+        <>
+            <GlobalStyle/>
+            <div>
+                <Title>Lunchplace</Title>
+            </div>
+        </>
     );
 }
 
