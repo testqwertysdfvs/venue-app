@@ -1,15 +1,17 @@
-import React from 'react';
-import GlobalStyle from './../../globalStyle';
+import React, {useState} from 'react';
+import GlobalStyle from '../../commonStyles';
 
 // Styles
 import {Title} from "./style";
 
 // Custom hooks
 import useGetVenuesForLunch from './../../hooks/useGetVenuesForLunch';
+import Search from "../Search";
 
 const App = () => {
+    const [address, setAddress] = useState('');
 
-    const venuesData = useGetVenuesForLunch('Amsterdam');
+    const venuesData = useGetVenuesForLunch(address);
     
     console.log('venuesData', venuesData)
 
@@ -18,6 +20,7 @@ const App = () => {
             <GlobalStyle/>
             <div>
                 <Title>Lunchplace</Title>
+                <Search onSearch={setAddress}/>
             </div>
         </>
     );
