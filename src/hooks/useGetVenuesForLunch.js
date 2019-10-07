@@ -7,17 +7,19 @@ export default function (address) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        (async function () {
-            setIsLoading(true);
-            try {
-                const data = await getVenuesForLunch(address);
-                setVenues(data.response.groups[0].items);
-                setIsLoading(false);
-            } catch (e) {
-                setError(e);
-                setIsLoading(false);
-            }
-        })()
+        if(address){
+            (async function () {
+                setIsLoading(true);
+                try {
+                    const data = await getVenuesForLunch(address);
+                    setVenues(data.response.groups[0].items);
+                    setIsLoading(false);
+                } catch (e) {
+                    setError(e);
+                    setIsLoading(false);
+                }
+            })()
+        }
     }, [address]);
     return {
         venues,
