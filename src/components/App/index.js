@@ -10,7 +10,7 @@ import Search from "../Search";
 import VoteTable from "../VoteTable";
 
 const App = () => {
-    const [address, setAddress] = useState('Amsterdam');
+    const [address, setAddress] = useState('');
     const [venues, addVenues] = useState([]);
 
     const venuesData = useGetVenuesForLunch(address, 'lunch');
@@ -54,6 +54,8 @@ const App = () => {
             usersVoted: venue.usersVoted.filter(id => id !== userId)
         }
     }))
+    
+    console.log('venuesData', venuesData)
 
     return (
         <>
@@ -61,7 +63,7 @@ const App = () => {
             <div>
                 <Title>Lunchplace</Title>
                 <Search onSearch={setAddress}/>
-                <VoteTable venues={venues} onVote={onVote}/>
+                <VoteTable venues={venues} onVote={onVote} isLoading={venuesData.isLoading}/>
             </div>
         </>
     );

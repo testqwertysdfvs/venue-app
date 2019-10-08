@@ -16,3 +16,17 @@ export const UserInput = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const ContentBlock = styled.div`
+  display: flex;
+  width: 815px;
+  height: 400px;
+  align-items: center;
+  justify-content: center;
+  color: #b4b4b4;
+  font-size: 24px;
+  text-align: center;
+  img {
+   width: 500px;
+  }
+`;

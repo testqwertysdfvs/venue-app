@@ -48,6 +48,7 @@ export const Input = styled.input`
   height: 40px;
   padding: 0 15px;
   margin-right: 20px;
+  min-width: 200px;
   ::placeholder,
   ::-webkit-input-placeholder {
     color: #b4b4b4;

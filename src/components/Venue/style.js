@@ -5,6 +5,7 @@ export const Block = styled.th`
     width: 160px;
     height: 80px;
     padding: 15px 20px;
+    background-color: ${props => props.isWinner ? '#7ff491' : 'transparent'};
 `;
 
 export const Category = styled.p`
