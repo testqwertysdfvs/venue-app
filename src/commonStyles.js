@@ -17,7 +17,8 @@ export default createGlobalStyle`
     font-style: normal;
 }
 body {
-font-family: 'Roboto';
+   font-family: 'Roboto';
+   padding: 20px 40px;
 }
 `;
 
@@ -46,6 +47,7 @@ export const Input = styled.input`
   border: 1px solid #eee;
   height: 40px;
   padding: 0 15px;
+  margin-right: 20px;
   ::placeholder,
   ::-webkit-input-placeholder {
     color: #b4b4b4;
@@ -59,5 +61,5 @@ export const InputBig = styled(Input)`
   font-size: 18px;
   height: 50px;
   padding: 0 20px;
-  margin-right: 20px;
+ 
 `;

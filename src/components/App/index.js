@@ -7,26 +7,34 @@ import {Title} from "./style";
 // Custom hooks
 import useGetVenuesForLunch from './../../hooks/useGetVenuesForLunch';
 import Search from "../Search";
-import UserLine from "../UserLine";
+import VoteTable from "../VoteTable";
 
 const App = () => {
-    const [address, setAddress] = useState('');
+    const [address, setAddress] = useState('Amsterdam');
     const [venues, addVenues] = useState([]);
-    const [users, addUser] = useState([{
-        id: 1,
-        name: 'User 1',
-    }, {
-        id: 2,
-        name: 'User 2',
-    }, {
-        id: 3,
-        name: 'User 3',
-    }, {
-        id: 4,
-        name: 'User 4',
-    }]);
 
-    const venuesData = useGetVenuesForLunch(address);
+    const venuesData = useGetVenuesForLunch(address, 'lunch');
+
+    // make json with venues data
+    useEffect(() => {
+        if (!venuesData.isLoading && !venuesData.error && venuesData.venues.length) {
+            const venuesList = [];
+            for (let i = 0; i < venuesData.venues.length; i++) {
+                const current = venuesData.venues[i].response.venue;
+                if(current){
+                    venuesList.push({
+                        id: current.id,
+                        name: current.name,
+                        categories: current.categories.map(category => category.pluralName),
+                        rating: current.rating,
+                        url: current.canonicalUrl,
+                        usersVoted: [],
+                    })
+                }
+            }
+            addVenues(venuesList);
+        }
+    }, [venuesData.isLoading, venuesData.error, venuesData.venues.length]);
 
     const onVote = (venueId, userId, remove) => addVenues(venues.map(venue => {
         // ad on remove user's vote from clicked venue
@@ -47,29 +55,13 @@ const App = () => {
         }
     }))
 
-    useEffect(() => {
-        if (!venuesData.isLoading && !venuesData.error && venuesData.venues.length) {
-            const venuesList = [];
-            for (let i = 0; i < venuesData.venues.length; i++) {
-                const current = venuesData.venues[i].venue;
-                venuesList.push({
-                    id: current.id,
-                    name: current.name,
-                    categories: current.categories.map(category => category.pluralName),
-                    usersVoted: [],
-                })
-            }
-            addVenues(venuesList);
-        }
-    }, [venuesData.isLoading, venuesData.error, venuesData.venues.length])
-
     return (
         <>
             <GlobalStyle/>
             <div>
                 <Title>Lunchplace</Title>
                 <Search onSearch={setAddress}/>
-                {users.map(user => <UserLine key={user.id} user={user} vote={onVote} venues={venues}/>)}
+                <VoteTable venues={venues} onVote={onVote}/>
             </div>
         </>
     );
