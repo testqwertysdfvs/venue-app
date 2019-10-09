@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Block, Category, Rating, Best} from "./style";
+import {Block, Name, Category, Rating, Best} from "./style";
 
 const Venue = ({name, url, rating, categories, isWinner}) => {
     return <Block isWinner={isWinner}>
         {isWinner && <Best/>}
-        <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
+        <Name href={url} target="_blank" rel="noopener noreferrer">{name}</Name>
         <Category>{categories.join(', ')}</Category>
         <Rating>{rating}</Rating>
     </Block>

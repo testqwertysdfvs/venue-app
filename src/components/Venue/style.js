@@ -10,6 +10,11 @@ export const Block = styled.th`
     position: relative;
 `;
 
+export const Name = styled.a`
+  display: inline-block;
+  height: 40px;
+`;
+
 export const Category = styled.p`
 height: 40px;
 color: #5d5d5d;
