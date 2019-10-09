@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {ReactComponent as Checkmark} from './../../assets/images/checkmark.svg';
 
 export const Row = styled.tr`
 td {
@@ -25,4 +26,14 @@ export const VoteCell = styled.div`
   height: 37px;
   border-radius: 5px;
   background-color: ${props => props.isVoted ? '#58d9bf' : 'transparent'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 `;
+
+export const Check = styled(Checkmark)`
+  width: 25px;
+  height: 25px;
+`;
+

@@ -54,8 +54,6 @@ const App = () => {
             usersVoted: venue.usersVoted.filter(id => id !== userId)
         }
     }))
-    
-    console.log('venuesData', venuesData)
 
     return (
         <>

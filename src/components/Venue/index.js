@@ -1,9 +1,10 @@
 import React from 'react';
-import {Block, Category, Rating} from "./style";
+import {Block, Category, Rating, Best} from "./style";
 
 const Venue = ({name, url, rating, categories, isWinner}) => {
     return <Block isWinner={isWinner}>
-        <a href={url}>{name}</a>
+        {isWinner ? <Best/> : null}
+        <a href={url} target="_blank">{name}</a>
         <Category>{categories.join(', ')}</Category>
         <Rating>{rating}</Rating>
     </Block>

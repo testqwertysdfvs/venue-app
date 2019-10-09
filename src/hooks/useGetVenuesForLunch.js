@@ -10,6 +10,7 @@ export default function (address, query) {
         if (address) {
             (async function () {
                 setIsLoading(true);
+                setError(false);
                 try {
                     const data = await api.venues.search(address, query);
                     const venuesDetails = await Promise.all(data.response.groups[0].items.map(item => api.venues.venueDetails(item.venue.id)));

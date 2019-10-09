@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import uniqid from 'uniqid';
 import {Input, Button} from "../../commonStyles";
 import {Table, UserInput, ContentBlock} from "./style";
-import preloader from './../../assets/preloader.gif';
+import preloader from './../../assets/images/preloader.gif';
 
 import UserLine from "../UserLine";
 import Venue from "../Venue";
@@ -14,33 +14,38 @@ const VoteTable = ({venues, onVote, isLoading}) => {
 
     const handleUserInputChange = (e) => setUserInput(e.target.value);
 
-    const findWinnerIds = () => {
+    const findWinnerIds = useCallback((venues) => {
         let id = [];
         let maxVotes = 0;
         for (let i = 0; i < venues.length; i++) {
             const current = venues[i];
             const currentVotes = current.usersVoted.length;
-            if (currentVotes > maxVotes) {
-                maxVotes = currentVotes;
-                id = [current.id];
-            }
-            if (currentVotes === maxVotes) {
-                id.push(current.id)
+            if (currentVotes !== 0) {
+                if (currentVotes > maxVotes) {
+                    maxVotes = currentVotes;
+                    id = [current.id];
+                }
+                if (currentVotes === maxVotes) {
+                    id.push(current.id)
+                }
             }
         }
         return id;
+    }, []);
+
+    const handleAddUser = () => {
+        setUserInput('');
+        addUser([...users, {id: uniqid(), name: userInputValue}])
     }
 
-    let content;
-
-    const winners = findWinnerIds();
-
     if (isLoading) {
-        content = <ContentBlock><img src={preloader}/></ContentBlock>
+        return <ContentBlock><img src={preloader}/></ContentBlock>
     } else if (venues.length === 0) {
-        content = <ContentBlock>Venues not found<br/>enter address in the search field to find venues</ContentBlock>
+        return <ContentBlock>Venues not found<br/>enter address in the search field to find venues</ContentBlock>
     } else if (venues.length) {
-        content = <Table>
+        const winners = findWinnerIds(venues);
+
+        return <><Table>
             <thead>
             <tr>
                 <th/>
@@ -65,20 +70,10 @@ const VoteTable = ({venues, onVote, isLoading}) => {
                 />)}
             </tbody>
         </Table>
-    }
-
-    const handleAddUser = () => {
-        setUserInput('');
-        addUser([...users, {id: uniqid(), name: userInputValue}])
-    }
-
-    return (
-        <>
-            {content}
             <UserInput>
                 <Input
                     type="text"
-                    value={userInputValue}
+                    value={userInputValue} Ò
                     onChange={handleUserInputChange}
                 />
                 <Button
@@ -86,9 +81,8 @@ const VoteTable = ({venues, onVote, isLoading}) => {
                 >
                     Add user
                 </Button>
-            </UserInput>
-        </>
-    )
+            </UserInput></>
+    }
 }
 
 VoteTable.propTypes = {
