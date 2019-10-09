@@ -17,8 +17,9 @@ export default function (address, query) {
                     setVenues(venuesDetails);
                     setIsLoading(false);
                 } catch (e) {
-                    setError(e);
+                    setVenues([]);
                     setIsLoading(false);
+                    setError(e);
                 }
             })()
         }

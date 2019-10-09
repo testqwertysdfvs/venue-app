@@ -17,7 +17,7 @@ const App = () => {
 
     // make json with venues data
     useEffect(() => {
-        if (!venuesData.isLoading && !venuesData.error && venuesData.venues.length) {
+        if (!venuesData.isLoading && !venuesData.error) {
             const venuesList = [];
             for (let i = 0; i < venuesData.venues.length; i++) {
                 const current = venuesData.venues[i].response.venue;
