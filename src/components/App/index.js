@@ -34,7 +34,7 @@ const App = () => {
             }
             addVenues(venuesList);
         }
-    }, [venuesData.isLoading, venuesData.error, venuesData.venues.length]);
+    }, [venuesData.isLoading, venuesData.error, venuesData.venues]);
 
     const onVote = (venueId, userId, remove) => addVenues(venues.map(venue => {
         // ad on remove user's vote from clicked venue
@@ -53,15 +53,21 @@ const App = () => {
             ...venue,
             usersVoted: venue.usersVoted.filter(id => id !== userId)
         }
-    }))
+    }));
+
+    // search address
+    const onSearch = (e, address) => {
+        e.preventDefault();
+        setAddress(address);
+    };
 
     return (
         <>
             <GlobalStyle/>
             <div>
                 <Title>Lunchplace</Title>
-                <Search onSearch={setAddress}/>
-                <VoteTable venues={venues} onVote={onVote} isLoading={venuesData.isLoading}/>
+                <Search onSearch={onSearch}/>
+                <VoteTable address={address} venues={venues} onVote={onVote} isLoading={venuesData.isLoading}/>
             </div>
         </>
     );

@@ -9,9 +9,9 @@ const Search = ({onSearch}) => {
 
     const handleSearchChange = (e) => setValue(e.target.value);
 
-    return <SearchBlock>
+    return <SearchBlock onSubmit={(e) => onSearch(e, value)}>
         <InputBig type="text" onChange={handleSearchChange} value={value} placeholder="Address"/>
-        <Button onClick={() => onSearch(value)}>Search</Button>
+        <Button type="submit">Search</Button>
     </SearchBlock>
 }
 

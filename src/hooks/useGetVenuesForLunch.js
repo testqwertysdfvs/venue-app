@@ -22,7 +22,7 @@ export default function (address, query) {
                 }
             })()
         }
-    }, [address]);
+    }, [address, query]);
     return {
         venues,
         isLoading,

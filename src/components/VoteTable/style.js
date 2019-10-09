@@ -12,7 +12,7 @@ export const Table = styled.table`
   }
 `;
 
-export const UserInput = styled.div`
+export const UserInput = styled.form`
   display: flex;
   align-items: center;
 `;
