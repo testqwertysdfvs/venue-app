@@ -12,7 +12,7 @@
  
  Rare case from my own practice:
  
- There was a big project based on very old version Ruby on Rails with a lot of legacy. And there ware React components on some pages. This React components were included by old deprecated RoR plugin. And by some issues we wasn't able to import styles inside components because this plugin didn't understand css/scss etc. files. We could add styles only globally. So using Styled components solved this problem.
+ There was a big project based on very old version Ruby on Rails with a lot of legacy. And there were React components on some pages. This React components were included by old deprecated RoR plugin. And by some issues we wasn't able to import styles inside components because this plugin didn't understand css/scss etc. files. We could add styles only globally. So using Styled components solved this problem.
   
 ###### Disadvantages:
 - Problems with syntax highlighting, linters etc. in different IDE
